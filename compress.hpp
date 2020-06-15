@@ -11,30 +11,30 @@ namespace itertools{
         compress(container1 co1, container2 co2): cont1(co1), cont2(co2){}
 
         class iterator{
-            typename container1::iterator it_begin1;
-            typename container2::iterator it_begin2;
+            typename container1::iterator a;
+            typename container2::iterator b;
             typename container1::iterator it_end;
         public:
-            iterator(typename container1::iterator begin1,typename container2::iterator begin2, typename container1::iterator end)
-            : it_begin1(begin1), it_begin2(begin2), it_end(end){}
+            iterator(typename container1::iterator _a,typename container2::iterator _b, typename container1::iterator end)
+            : a(_a), b(_b), it_end(end){}
 
             bool operator==(const iterator &it) const 
             {
-                return it_begin1 == it.it_begin1;
+                return a == it.a;
             }
 
             bool operator!=(const iterator &it) const 
             {
-                return it_begin1 != it.it_begin1;
+                return a != it.a;
             }
 
             iterator &operator++(){
-            it_begin1 = it_begin1 + 1;
-            it_begin2 = it_begin2 + 1;
-            while (it_begin1 != it_end && !(*it_begin2))
+            a++;
+            b++;
+            while (a != it_end && !(*b))
             {
-            it_begin1++;
-            it_begin2++;
+            a++;
+            b++;
             }
             return *this;
             }
@@ -45,18 +45,18 @@ namespace itertools{
             return temp;
             }
 
-            decltype(*(begin1.begin())) operator*(){
-            if(!(*it_begin2)) ++*this;
-            return *it_begin1;
+            decltype(*(cont1.begin())) operator*(){
+            if(!(*b)) ++(*this);
+            return *a;
             }
         };
 
         iterator begin(){
-        return iterator(begin1.begin(),begin2.begin(),begin1.end());
+        return iterator(cont1.begin(),cont2.begin(),cont1.end());
         }
 
         iterator end(){
-        return iterator(begin1.end(),begin2.begin(),begin1.end());
+        return iterator(cont1.end(),cont2.begin(),cont1.end());
         }
     };
 }

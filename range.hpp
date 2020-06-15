@@ -1,57 +1,48 @@
 #pragma once
-
-namespace itertools{
-    class range
-    {
-        int begin;
-        int end;
+namespace itertools {
+    class range {
+        int start;
+        int finish;
     public:
-        range(int s, int e): begin(s), end(e){}
+        range(int s, int f) : start(s), finish(f) {}
 
-        class iterator
-        {
-            int i;
+        class iterator {
+            int current;
         public:
-            iterator(int start = 0): i(start){}
+            iterator(int c = 0) : current(c) {}
 
-            bool operator==(const iterator &it) const 
-            {
-                return i == it.i;
-            }
-
-            bool operator!=(const iterator &it) const 
-            {
-                return i != it.i;
-            }
-
-            iterator &operator++()
-            {
-                i++;
+            iterator &operator++() {
+                current = current + 1;
                 return *this;
             }
 
-            iterator operator++(int)
-            {
+            const iterator operator++(int) {
                 iterator temp = *this;
-                i++;
+                ++current;
                 return temp;
             }
 
-            int operator*()
-            {
-                return i;
+            bool operator==(const iterator &it) const {
+                return current == it.current;
             }
+
+            bool operator!=(const iterator &it) const {
+                return current != it.current;
+            }
+
+            int operator*(){
+                return current;
+            }
+
         };
-    
-        iterator begin()
-        {
-            return iterator(begin);
+
+        iterator begin() {
+            return iterator(start);
         }
 
-        iterator end()
-        {
-            return iterator(end);
+        iterator end() {
+            return iterator(finish);
         }
 
     };
-};
+}

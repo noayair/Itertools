@@ -29,7 +29,7 @@ namespace itertools{
             }
 
             iterator &operator++(){
-            it_begin = it_begin + 1;
+            ++it_begin;
             while (it_begin != it_end && condition(*it_begin))
             {
             it_begin++;
@@ -44,7 +44,7 @@ namespace itertools{
             }
 
             decltype(*(cont.begin())) operator*(){
-            if(condition(*it_begin)) ++*this;
+            if(condition(*it_begin)) ++(*this);
             return *it_begin;
             }
         };
