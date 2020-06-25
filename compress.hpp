@@ -1,4 +1,3 @@
-#pragma once
 #include <iostream>
 using namespace std;
 
@@ -16,7 +15,13 @@ namespace itertools{
             typename container1::iterator it_end;
         public:
             iterator(typename container1::iterator _a,typename container2::iterator _b, typename container1::iterator end)
-            : a(_a), b(_b), it_end(end){}
+            : a(_a), b(_b), it_end(end)
+            {
+                while(a != it_end && !(*b)){
+                ++a;
+                ++b;
+            }
+            }
 
             bool operator==(const iterator &it) const 
             {

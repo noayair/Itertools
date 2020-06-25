@@ -1,4 +1,3 @@
-#pragma once
 #include <iostream>
 using namespace std;
 
@@ -16,7 +15,12 @@ namespace itertools{
             lambda condition;
         public:
             iterator(typename container::iterator begin,typename container::iterator end,lambda co)
-            : it_begin(begin), it_end(end), condition(co){}
+            : it_begin(begin), it_end(end), condition(co)
+            {
+                while(it_begin != it_end && condition(*it_begin)){
+                it_begin++;
+            }
+            }
 
             bool operator==(const iterator &it) const 
             {
